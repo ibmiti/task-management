@@ -13,7 +13,11 @@
                     <label for="taskPriority">Priority</label>
                     <input type="number" class="form-control" id="taskPriority" name="priority" required>
                 </div>
-                <button type="submit" class="btn btn-primary">Create Task</button>
+                <div class="form-group">
+                    <label for="taskProject">Project</label>
+                    <input type="text" class="form-control" id="taskProject" name="taskProject" required>
+                </div>
+                <button type="submit" class="btn btn-primary mt-2">Create Task</button>
             </form>
         </div>
     </div>

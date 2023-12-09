@@ -13,5 +13,5 @@ class Task extends Model
     // 2. not all fields should be mass-assignable for security reasons, this protects against error or malicious actions
     // 3. mass-assignable = ability to update multiple fields during a single crud action (create,read, update,delete)
     // 4. other fields, like id and timestamps will not be freely changeable, which protects integrity of the records
-    protected $fillable = ['name', 'priority'];
+    protected $fillable = ['name', 'priority', 'project'];
 }

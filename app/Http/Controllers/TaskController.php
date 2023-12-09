@@ -11,6 +11,8 @@ class TaskController extends Controller
     public function index(){
         // The tasks with highest priority value, returned at top of list
         $tasks = Task::orderBy('priority')->get();
+        // get number of project types
+        // $projectTypes = Task::distinct('project')->pluck('project');
         return view('tasks.index', ['tasks'=>$tasks]);
         // alternative: converts above array, into a associative array
         // return view('tasks', compact('tasks'));
@@ -22,14 +24,12 @@ class TaskController extends Controller
         $task->name = $request->input('name');
         // takes current count and adds 1, for every new task created
         $task->priority = Task::count() + 1;
+        $task->project = $request->input('taskProject');
         // sets tasks into db
         $task->save();
 
         return redirect()->route('index')->with('success', "Task Created!");
     }
-
-    // edit
-
 
     // update priority
     public function update(Request $request, $id)

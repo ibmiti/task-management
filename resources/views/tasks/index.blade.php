@@ -13,6 +13,7 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ $task->name }}</h5>
                             <p class="card-text">Priority: {{ $task->priority }}</p>
+                            <p class="card-text">Project: {{ $task->project }}</p>
                                 <!-- Separate deletion form -->
                             <form action="{{ route('destroy_task', $task->id) }}" method="post">
                                 @csrf
