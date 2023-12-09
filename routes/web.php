@@ -28,6 +28,7 @@ Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store')->na
 
 
 // delete
+Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('destroy_task');
 
 // reorder
 
