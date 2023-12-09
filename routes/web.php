@@ -20,13 +20,11 @@ Route::get('/task/create', function() {
     return view('tasks.create');
 })->name('tasks_create_view');
 
+// create
 Route::post('/tasks', [TaskController::class, 'store'])->name('create_task');
 
 // update
 Route::resource('tasks', TaskController::class)->only(['update']);
 
-
 // delete
 Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('destroy_task');
-
-
