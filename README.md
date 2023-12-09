@@ -18,6 +18,9 @@ Ensure you have the following software installed:
    ```bash
    git clone https://github.com/ibmiti/task-management
 
+1.a Unzip file 
+    unzip task-management.zip
+
 2. Change into the project directory:
  
     cd your-project ( you can name it whatever you like )
