@@ -11,16 +11,42 @@
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.14.0/Sortable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // 1. Select element after the document has loaded
-        // 2. initialize sortable instance on the task-list element which was selected in step 1.
-        // 3. handle event: on grap, allow dragging
-        // 4. apply animnation (occurs at 140 milliseconds)
-        document.addEventListener('DOMContentLoaded', function () {
+
+        document.addEventListener('DOMContentLoaded', function() {
             const taskList = document.getElementById('task-list');
-            new Sortable(taskList, {
+
+            const sortable = new Sortable(taskList, {
                 handle: '.card-header',
-                animation: 150
+                animation: 150,
+                onEnd: function (event){
+                    // Get all sorted elements
+                    const sortedElements = event.from.children;
+
+                    // move through(iterate) the sorted elements to update priorities
+                    Array.from(sortedElements).forEach((element, index) => {
+                        const taskId = element.getAttribute('data-task-id');
+                        updateTaskPriority(taskId, index + 1);
+                    });
+                }
             });
+
+            // update task priority in db
+            // Function to update task priority via Ajax
+            function updateTaskPriority(taskId, newPriority) {
+                    fetch(`/update-task-priority/${taskId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            priority: newPriority
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => console.log(data))
+                    .catch(error => console.error('Error:', error));
+            }
         });
     </script>
 </body>
