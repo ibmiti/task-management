@@ -27,7 +27,6 @@ class TaskController extends Controller
         $task->project = $request->input('taskProject');
         // sets tasks into db
         $task->save();
-
         return redirect()->route('index')->with('success', "Task Created!");
     }
 
