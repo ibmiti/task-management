@@ -44,7 +44,7 @@ class TaskController extends Controller
         // if find or fail method identified the task, delete
         $task->delete();
 
-        return redirect()->route('tasks.index')->with('success', 'Deleted Task');
+        return redirect()->route('index')->with('success', 'Deleted Task');
     }
     // reorder methods
 }
