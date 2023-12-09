@@ -17,9 +17,9 @@ class TaskController extends Controller
     }
 
     // Create new tasks, from create view
-    public function create(){
-        return view('tasks.create');
-    }
+    // public function create(){
+    //     return view('tasks.create');
+    // }
 
     // Store (create) tasks into db table tasks
     public function store(Request $request){
@@ -30,13 +30,23 @@ class TaskController extends Controller
         // sets tasks into db
         $task->save();
 
-        return redirect()->route('tasks.index')->with('success', "Task Created!");
+        return redirect()->route('index')->with('success', "Task Created!");
     }
 
     // edit
 
 
-    // update
+    // update priority
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'priority' => 'required|integer',
+        ]);
+
+        $task = Task::findOrFail($id);
+        $task->update(['priority' => $request->input('priority')]);
+        return back()->response()->json(['message' => 'Task priority updated successfully']);
+    }
 
     // delete
     public function destroy($id){

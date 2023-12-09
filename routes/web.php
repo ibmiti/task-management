@@ -15,17 +15,18 @@ use App\Http\Controllers\TaskController;
 */
 
 Route::get('/', [TaskController::class, 'index'])->name('index');
-Route::get('/tasks/create', [TaskController::class, 'create'])->name('tasks.create')->name('create_view');
-Route::post('/tasks', [TaskController::class, 'store'])->name('tasks.store')->name('create_task');
 
-// edit
+Route::get('/task/create', function() {
+    return view('tasks.create');
+})->name('tasks_create_view');
+
+Route::post('/tasks', [TaskController::class, 'store'])->name('create_task');
 
 // update
+Route::resource('tasks', TaskController::class)->only(['update']);
 
 
 // delete
 Route::delete('/tasks/{id}', [TaskController::class, 'destroy'])->name('destroy_task');
 
-// reorde: update priority
-Route::post('/update-task-priority/{taskId}', [TaskController::class, 'updateTaskPriority'])->name('update_task_priority');
 
