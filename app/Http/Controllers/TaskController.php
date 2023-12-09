@@ -16,11 +16,6 @@ class TaskController extends Controller
         // return view('tasks', compact('tasks'));
     }
 
-    // Create new tasks, from create view
-    // public function create(){
-    //     return view('tasks.create');
-    // }
-
     // Store (create) tasks into db table tasks
     public function store(Request $request){
         $task = new Task();
